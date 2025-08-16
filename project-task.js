@@ -91,3 +91,67 @@ Step-by-Step:
 // console.log("Uppercased names:", ...);
 // console.log("Discounted products:", ...);
 // console.log("Total value in stock:", ...);
+
+
+Task 1 : Filter Products by Availability
+// 📦 Starting Dataset: Product List
+// ============================================
+
+const products = [
+  { name: "Laptop", price: 1000, inStock: true },
+  { name: "Phone", price: 500, inStock: false },
+  { name: "Tablet", price: 800, inStock: true },
+  { name: "Monitor", price: 300, inStock: true },
+  { name: "Keyboard", price: 100, inStock: false },
+];
+
+// 🔧 Tasks
+
+
+//  Task 1: Filter Products by Availability
+function filterProducts(arr, callback) {
+  return arr.filter(callback);
+}
+
+// Example: filter only in stock products
+let availableProducts = filterProducts(products, function(product) {
+  return product.inStock === true;
+});
+
+//  Task 2: Transform Product Names (uppercase)
+let uppercasedNames = products.map(function(product) {
+  return product.name.toUpperCase();
+});
+
+//  Task 3: Generate Discounted Prices
+function applyDiscount(discountPercent) {
+  return function(product) {
+    let discountedPrice = product.price - (product.price * discountPercent / 100);
+    return { ...product, price: discountedPrice };
+  };
+}
+
+// Apply 20% discount to all products
+let discountedProducts = products.map(applyDiscount(20));
+
+//  Task 4: Calculate Total Inventory Value
+let totalInventoryValue = products.reduce(function(total, product) {
+  if (product.inStock) {
+    return total + product.price;
+  }
+  return total;
+}, 0);
+
+
+
+//  Console Testing of my Work
+
+
+console.log("Filtered products (in stock):", availableProducts);
+console.log("Uppercased names:", uppercasedNames);
+console.log("Discounted products (20% off):", discountedProducts);
+console.log("Total value in stock:", totalInventoryValue);
+
+Output:
+[ "LAPTOP", "PHONE", "TABLET", "MONITOR", "KEYBOARD" ]
+
